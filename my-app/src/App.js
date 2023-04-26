@@ -1,41 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
-import { ISAUTH } from './graphql/mutation'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
+import { ISAUTH } from "./graphql/mutation";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from './components/Header'
-import Footer from './components/Footer'
-import CartSwitch from './components/CartSwitch'
-import './index.scss'
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CartSwitch from "./components/CartSwitch";
+import "./index.scss";
 
-import MainPage from './pages/MainPage'
-import ProductList from './pages/ProductList'
-import Activation from './pages/Activation'
-import RestorePage from './pages/RestorePage'
-import Cart from './pages/CartPage'
+import MainPage from "./pages/MainPage";
+import ProductList from "./pages/ProductList";
+import Activation from "./pages/Activation";
+import RestorePage from "./pages/RestorePage";
+import Cart from "./pages/CartPage";
 
 function App() {
-  const [IsAuth] = useMutation(ISAUTH)
-  const [isAuth, setIsAuth] = useState(false)
-  const [cartList, setCartList] = useState([])
+  const [IsAuth] = useMutation(ISAUTH);
+  const [isAuth, setIsAuth] = useState(false);
+  const [cartList, setCartList] = useState([]);
+
   //eslint-disable-next-line
   useEffect(() => {
-    setCartList(JSON.parse(localStorage.getItem('cart')))
-  }, [])
-
-  useEffect(async () => {
-    const { data, error } = await IsAuth()
-    if (error) {
-      setIsAuth(false)
-    } else {
-      setIsAuth(data.checkAuth)
-    }
-    //eslint-disable-next-line
-  }, [])
+    setCartList(JSON.parse(localStorage.getItem("cart")));
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartList))
-  }, [cartList])
+    // const { data, error } = await IsAuth()
+    // if (error) {
+    //   setIsAuth(false)
+    // } else {
+    //   setIsAuth(data.checkAuth)
+    // }
+
+    IsAuth().then(({ data, error }) => {
+      if (error) {
+        setIsAuth(false);
+      } else {
+        setIsAuth(data.checkAuth);
+      }
+    });
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartList));
+  }, [cartList]);
   return (
     <Router>
       <Header isAuth={isAuth} setIsAuth={setIsAuth} />
@@ -55,7 +64,7 @@ function App() {
       </Routes>
       <Footer />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

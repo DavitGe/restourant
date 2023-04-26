@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
 import {
   Container,
@@ -8,38 +8,43 @@ import {
   Text,
   Title,
   Button,
-} from '../styles/StyledComponents'
-import CartPorduct from '../components/CartProduct'
+} from "../styles/StyledComponents";
+import CartPorduct from "../components/CartProduct";
 
-
+import { useLocation } from "react-router-dom";
 
 const Cart = ({ cartList, setCartList }) => {
-  let startingPrice = 0
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  let startingPrice = 0;
   if (cartList) {
     if (cartList !== []) {
       cartList.map((e) => {
         if (e) {
-          startingPrice += parseInt(e.price.slice(0, -1)) * e.count
+          startingPrice += parseInt(e.price.slice(0, -1)) * e.count;
         }
-      })
+      });
     }
   }
   //eslint-disable-next-line
-  const [price, setPrice] = useState(startingPrice)
+  const [price, setPrice] = useState(startingPrice);
   const onConfirm = () => {
-    console.log('confirm')
-  }
+    console.log("confirm");
+  };
   useEffect(() => {
-    let result = 0
+    let result = 0;
     if (cartList) {
       cartList.map((e) => {
         if (e) {
-          result += parseInt(e.price.slice(0, -1)) * e.count
+          result += parseInt(e.price.slice(0, -1)) * e.count;
         }
-      })
-      setPrice(result)
+      });
+      setPrice(result);
     }
-  }, [cartList])
+  }, [cartList]);
   if (cartList) {
     return (
       <div style={{ marginBottom: 84 }}>
@@ -49,8 +54,8 @@ const Cart = ({ cartList, setCartList }) => {
         <Container
           row
           style={{
-            justifyContent: 'space-between',
-            alignItems: 'end',
+            justifyContent: "space-between",
+            alignItems: "end",
             paddingLeft: 4,
             paddingRight: 4,
           }}
@@ -71,21 +76,21 @@ const Cart = ({ cartList, setCartList }) => {
                   setCartList={setCartList}
                   key={product.id}
                 />
-              )
+              );
             }
           })}
           <Button
-            style={{ width: 161, margin: '48px auto' }}
+            style={{ width: 161, margin: "48px auto" }}
             onClick={onConfirm}
           >
             Confirm Order
           </Button>
         </Container>
       </div>
-    )
+    );
   } else {
-    return null
+    return null;
   }
-}
+};
 
-export default Cart
+export default Cart;

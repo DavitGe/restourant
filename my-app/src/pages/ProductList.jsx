@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 import {
   Container,
   SectionText,
@@ -8,18 +8,19 @@ import {
   colors,
   BannerContainer,
   Banner,
-} from '../styles/StyledComponents'
-import Product from '../components/Product'
+} from "../styles/StyledComponents";
+import Product from "../components/Product";
 
-import { useQuery } from '@apollo/client'
-import { GET_PRODUCTS } from '../graphql/query'
+import { useQuery } from "@apollo/client";
+import { GET_PRODUCTS } from "../graphql/query";
 
+import { useLocation } from "react-router-dom";
 const Parameter = styled.button`
   background-color: #fff;
   border: 1px solid rgba(220, 120, 11, 0.7);
   border-radius: 32px;
   color: rgba(220, 120, 11, 0.7);
-  font-family: 'Roboto', 'sans-serif';
+  font-family: "Roboto", "sans-serif";
   font-weight: 500;
   font-size: 16px;
   padding: 8px 24px;
@@ -49,14 +50,14 @@ const Parameter = styled.button`
         opacity: 1;
       }
     `}
-`
+`;
 
 const PageButton = styled.button`
   background-color: #fff;
   border: 1px solid rgba(220, 120, 11, 0.7);
   border-radius: 4px;
   color: rgba(220, 120, 11, 0.7);
-  font-family: 'Roboto', 'sans-serif';
+  font-family: "Roboto", "sans-serif";
   font-weight: 500;
   font-size: 16px;
   padding: 10px 14px;
@@ -85,26 +86,31 @@ const PageButton = styled.button`
         border-width: 0;
       }
     `}
-`
+`;
 
 const ProductList = ({ setCartList }) => {
-  const [activeElement, setActiveElement] = useState(0)
-  const query = useQuery(GET_PRODUCTS)
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  const [activeElement, setActiveElement] = useState(0);
+  const query = useQuery(GET_PRODUCTS);
   if (query.loading) {
-    return null
+    return null;
   }
-  const { data } = query
-  const products = data.products
+  const { data } = query;
+  const products = data.products;
 
   const categories = [
-    'All',
-    'Burgers',
-    'Pizza',
-    'Meaty',
-    'Salads',
-    'Fruits',
-    'Drinks',
-  ]
+    "All",
+    "Burgers",
+    "Pizza",
+    "Meaty",
+    "Salads",
+    "Fruits",
+    "Drinks",
+  ];
   return (
     <div style={{ marginBottom: 84 }}>
       <BannerContainer>
@@ -119,7 +125,7 @@ const ProductList = ({ setCartList }) => {
             marginLeft: 0,
             marginTop: 24,
             marginBottom: 64,
-            flexWrap: 'wrap',
+            flexWrap: "wrap",
           }}
         >
           {categories.map((category, index) => {
@@ -128,30 +134,30 @@ const ProductList = ({ setCartList }) => {
                 <Parameter key={index} active>
                   {category}
                 </Parameter>
-              )
+              );
             }
             return (
               <Parameter
                 key={index}
                 onClick={() => {
-                  setActiveElement(index)
+                  setActiveElement(index);
                 }}
               >
                 {category}
               </Parameter>
-            )
+            );
           })}
         </Container>
-        <Container style={{ flexWrap: 'wrap' }}>
+        <Container style={{ flexWrap: "wrap" }}>
           {products.map((product) => {
             if (activeElement === 0) {
-              return <Product key={product._id} product={product} />
+              return <Product key={product._id} product={product} />;
             }
             const categoryValidation = product.categories.find(
               (category) =>
                 category.toLowerCase() ===
                 categories[activeElement].toLowerCase()
-            )
+            );
             if (categoryValidation) {
               return (
                 <Product
@@ -159,20 +165,20 @@ const ProductList = ({ setCartList }) => {
                   product={product}
                   setCartList={setCartList}
                 />
-              )
+              );
             } else {
-              return null
+              return null;
             }
           })}
         </Container>
-        <Container style={{ alignSelf: 'center' }}>
+        <Container style={{ alignSelf: "center" }}>
           <PageButton active>1</PageButton>
           <PageButton>2</PageButton>
           <PageButton>3</PageButton>
         </Container>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default ProductList
+export default ProductList;
