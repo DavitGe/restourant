@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import { animateScroll as scroll } from 'react-scroll'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import Logo from '../images/logo.png'
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { animateScroll as scroll } from "react-scroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import Logo from "../images/logo.png";
 import {
   Button,
   Container,
@@ -14,15 +14,15 @@ import {
   LogoContainer,
   MobileIcon,
   colors,
-} from '../styles/StyledComponents'
+} from "../styles/StyledComponents";
 
-import Login from './LoginModal'
-import Register from './RegisterModal'
-import Restore from './RestoreModal'
-import MobileModal from './MobileModal'
+import Login from "./LoginModal";
+import Register from "./RegisterModal";
+import Restore from "./RestoreModal";
+import MobileModal from "./MobileModal";
 
 const Nav = styled.nav`
-  background: ${({ scrollNav }) => (scrollNav ? '#FFF' : 'transparent')};
+  background: ${({ scrollNav }) => (scrollNav ? "#FFF" : "transparent")};
   height: 80px;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ const Nav = styled.nav`
   @media (max-width: 784px) {
     height: 60px;
   }
-`
+`;
 const Button1 = styled(Button)`
   @media (max-width: 1011px) {
     margin-right: 8px;
@@ -49,48 +49,48 @@ const Button1 = styled(Button)`
   @media (max-width: 784px) {
     display: none;
   }
-`
+`;
 const Header = ({ isAuth, setIsAuth }) => {
-  const [activeLogin, setActiveLogin] = useState(false)
-  const [activeRegister, setActiveRegister] = useState(false)
-  const [activeRestore, setActiveRestore] = useState(false)
-  const [scrollNav, setScrollNav] = useState(false)
-  const [activeMobile, setActiveMobile] = useState(false)
+  const [activeLogin, setActiveLogin] = useState(false);
+  const [activeRegister, setActiveRegister] = useState(false);
+  const [activeRestore, setActiveRestore] = useState(false);
+  const [scrollNav, setScrollNav] = useState(false);
+  const [activeMobile, setActiveMobile] = useState(false);
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
-      setScrollNav(true)
+      setScrollNav(true);
     } else {
-      setScrollNav(false)
+      setScrollNav(false);
     }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', changeNav)
-  }, [])
+    window.addEventListener("scroll", changeNav);
+  }, []);
 
   const signOutHandler = async () => {
-    localStorage.removeItem('token')
-    setIsAuth(false)
-  }
+    localStorage.removeItem("token");
+    setIsAuth(false);
+  };
 
   const toggleHome = () => {
-    scroll.scrollToTop()
-  }
+    scroll.scrollToTop();
+  };
 
   return (
     <Nav scrollNav={scrollNav}>
       <Container
         style={{
-          alignSelf: 'center',
-          width: '100%',
+          alignSelf: "center",
+          width: "100%",
           paddingTop: 32,
           paddingBottom: 24,
         }}
       >
         <NavBar
           style={{
-            alignItems: 'center',
+            alignItems: "center",
           }}
         >
           <Div>
@@ -211,7 +211,7 @@ const Header = ({ isAuth, setIsAuth }) => {
         signOutHandler={signOutHandler}
       />
     </Nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

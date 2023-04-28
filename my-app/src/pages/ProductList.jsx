@@ -15,6 +15,7 @@ import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../graphql/query";
 
 import { useLocation } from "react-router-dom";
+
 const Parameter = styled.button`
   background-color: #fff;
   border: 1px solid rgba(220, 120, 11, 0.7);
