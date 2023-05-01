@@ -47,7 +47,6 @@ function App() {
   return (
     <Router>
       <Header cartList={cartList} isAuth={isAuth} setIsAuth={setIsAuth} />
-      {/* <CartSwitch cartList={cartList} /> */}
       <Routes>
         <Route path="/api/activate/:link" element={<Activation />} />
         <Route path="/api/restore/:link" element={<RestorePage />} />
