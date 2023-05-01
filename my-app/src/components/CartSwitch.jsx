@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { colors } from '../styles/StyledComponents'
-import cart from '../images/cart.svg'
-import { Link } from 'react-router-dom'
-import { animateScroll as scroll } from 'react-scroll'
+import React, { useState } from "react";
+import styled from "styled-components";
+import { colors } from "../styles/StyledComponents";
+import cart from "../images/cart.svg";
+import { Link } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
 
 const LogoContainer = styled.div`
   cursor: pointer;
@@ -21,9 +21,9 @@ const LogoContainer = styled.div`
   @media (max-width: 1300px) {
     right: 10px;
   }
-`
+`;
 const Count = styled.div`
-  font-family: 'Roboto', 'sans-serif';
+  font-family: "Roboto", "sans-serif";
   font-weight: 500;
   font-size: 14px;
   display: flex;
@@ -41,22 +41,22 @@ const Count = styled.div`
   @media (max-width: 1300px) {
     right: 10px;
   }
-`
+`;
 const CartImg = styled.img`
   width: 32px;
   height: 32px;
   color: #fff;
-`
+`;
 const CartSwitch = ({ cartList }) => {
   //eslint-disable-next-line
-  const [count, setCount] = useState(0)
-  // const cartList = JSON.parse(localStorage.getItem('cart'))
+  const [count, setCount] = useState(0);
+
   if (cartList && cartList.length !== count) {
-    setCount(cartList.length)
+    setCount(cartList.length);
   }
   const toggleHome = () => {
-    scroll.scrollToTop()
-  }
+    scroll.scrollToTop();
+  };
   if (count !== 0) {
     return (
       <Link to="/cart" onClick={toggleHome}>
@@ -67,10 +67,10 @@ const CartSwitch = ({ cartList }) => {
           <CartImg src={cart} />
         </LogoContainer>
       </Link>
-    )
+    );
   } else {
-    return null
+    return null;
   }
-}
+};
 
-export default CartSwitch
+export default CartSwitch;

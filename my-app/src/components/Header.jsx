@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { animateScroll as scroll } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import Logo from "../images/logo.png";
+import cart from "../images/cart.svg";
+
 import {
   Button,
   Container,
@@ -50,12 +53,65 @@ const Button1 = styled(Button)`
     display: none;
   }
 `;
-const Header = ({ isAuth, setIsAuth }) => {
+
+const ProfileWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+`;
+
+const CartImg = styled.img`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transform: scaleX(-1);
+`;
+
+const CartWrapper = styled(Link)`
+  position: relative;
+  cursor: pointer;
+
+  transition: 0.2s;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+`;
+
+const Counter = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  margin-right: -10px;
+  margin-top: -9px;
+
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-family: "Roboto", "sans-serif";
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Header = ({ isAuth, setIsAuth, cartList }) => {
   const [activeLogin, setActiveLogin] = useState(false);
   const [activeRegister, setActiveRegister] = useState(false);
   const [activeRestore, setActiveRestore] = useState(false);
   const [scrollNav, setScrollNav] = useState(false);
   const [activeMobile, setActiveMobile] = useState(false);
+  const [count, setCount] = useState(0);
+
+  if (cartList && cartList.length !== count) {
+    setCount(cartList.length);
+  }
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -167,15 +223,25 @@ const Header = ({ isAuth, setIsAuth }) => {
               </NavA>
             </NavMenu>
           </Div>
-          {isAuth ? (
-            <Button1 style={{ zIndex: 1 }} onClick={signOutHandler}>
-              Sign out
-            </Button1>
-          ) : (
-            <Button1 style={{ zIndex: 1 }} onClick={() => setActiveLogin(true)}>
-              Sign In
-            </Button1>
-          )}
+          <ProfileWrapper>
+            <CartWrapper to="/cart">
+              {count !== 0 && <Counter>{count}</Counter>}
+              <CartImg src={cart} />
+            </CartWrapper>
+            {isAuth ? (
+              <Button1 style={{ zIndex: 1 }} onClick={signOutHandler}>
+                Sign out
+              </Button1>
+            ) : (
+              <Button1
+                style={{ zIndex: 1 }}
+                onClick={() => setActiveLogin(true)}
+              >
+                Sign In
+              </Button1>
+            )}
+          </ProfileWrapper>
+
           <MobileIcon onClick={() => setActiveMobile(true)}>
             <FontAwesomeIcon icon={faBars} color={colors.main} size="2x" />
           </MobileIcon>

@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CartSwitch from "./components/CartSwitch";
 import "./index.scss";
 
 import MainPage from "./pages/MainPage";
@@ -47,8 +46,8 @@ function App() {
   }, [cartList]);
   return (
     <Router>
-      <Header isAuth={isAuth} setIsAuth={setIsAuth} />
-      <CartSwitch cartList={cartList} />
+      <Header cartList={cartList} isAuth={isAuth} setIsAuth={setIsAuth} />
+      {/* <CartSwitch cartList={cartList} /> */}
       <Routes>
         <Route path="/api/activate/:link" element={<Activation />} />
         <Route path="/api/restore/:link" element={<RestorePage />} />
