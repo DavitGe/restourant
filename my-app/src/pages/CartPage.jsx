@@ -19,7 +19,9 @@ const Cart = ({ cartList, setCartList }) => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   let startingPrice = 0;
+
   if (cartList) {
     if (cartList !== []) {
       cartList.map((e) => {
@@ -45,6 +47,7 @@ const Cart = ({ cartList, setCartList }) => {
       setPrice(result);
     }
   }, [cartList]);
+
   if (cartList) {
     return (
       <div style={{ marginBottom: 84 }}>
