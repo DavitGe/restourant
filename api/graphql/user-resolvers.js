@@ -131,20 +131,19 @@ const resolvers = {
         throw ApiError.unexpectedError(e);
       }
     },
-    sendResLink: (_, args) => {
+    sendResLink: async (_, args) => {
       try {
         const { email } = args;
-        return User.findOne({ email }).then((user) => {
-          if (!user) {
-            throw ApiError.BadRequest("User with such email doesn't exist");
-          }
-          return mailService
-            .sendRestoreMail(
-              `${process.env.API_URL}/api/restore/${user.restoreLink}`,
-              email
-            )
-            .then(() => true);
-        });
+        const user = await User.findOne({ email });
+        if (!user) {
+          throw ApiError.BadRequest("User with such email doesn't exist");
+        }
+
+        mailService.sendRestoreMail(
+          `${process.env.API_URL}/api/restore/${user.restoreLink}`,
+          email
+        );
+        return true;
       } catch (e) {
         throw ApiError.unexpectedError(e);
       }

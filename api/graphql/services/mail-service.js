@@ -40,7 +40,7 @@ class mailService {
       `,
       });
     } catch (e) {
-      console.log("raxdebaa", e);
+      throw e;
     }
   }
 }

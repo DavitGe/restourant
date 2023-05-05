@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 export const REGISTRATION = gql`
   mutation Registration(
-    $emtrail: String!
-    $username: Sing!
+    $email: String!
+    $username: String!
     $password: String!
   ) {
     registration(email: $email, username: $username, password: $password) {
