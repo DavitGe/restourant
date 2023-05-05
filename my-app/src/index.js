@@ -11,7 +11,9 @@ import {
   ApolloLink,
 } from "@apollo/client";
 
-const httpLink = new HttpLink({ uri: "http://localhost:4000/" });
+const httpLink = new HttpLink({
+  uri: "https://restourant-ggx8hha3x-davitge.vercel.app/",
+});
 
 const authLink = new ApolloLink((operation, forward) => {
   // Retrieve the authorization token from local storage.
