@@ -33,9 +33,11 @@ const Cart = ({ cartList, setCartList }) => {
   }
   //eslint-disable-next-line
   const [price, setPrice] = useState(startingPrice);
+
   const onConfirm = () => {
     console.log("confirm");
   };
+
   useEffect(() => {
     let result = 0;
     if (cartList) {

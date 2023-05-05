@@ -1,9 +1,9 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const REGISTRATION = gql`
   mutation Registration(
-    $email: String!
-    $username: String!
+    $emtrail: String!
+    $username: Sing!
     $password: String!
   ) {
     registration(email: $email, username: $username, password: $password) {
@@ -17,7 +17,7 @@ export const REGISTRATION = gql`
       }
     }
   }
-`
+`;
 
 export const ACTIVATION = gql`
   mutation Activation($activationLink: String) {
@@ -26,7 +26,7 @@ export const ACTIVATION = gql`
       username
     }
   }
-`
+`;
 
 export const AUTHORIZATION = gql`
   mutation Authorization($password: String, $username: String) {
@@ -37,19 +37,19 @@ export const AUTHORIZATION = gql`
       }
     }
   }
-`
+`;
 
 export const ISAUTH = gql`
   mutation IsAuth {
     checkAuth
   }
-`
+`;
 
 export const SEND_RES_LINK = gql`
   mutation SendResLink($email: String) {
     sendResLink(email: $email)
   }
-`
+`;
 
 export const RES_PASS = gql`
   mutation ResPass($password: String, $restoreLink: String) {
@@ -57,4 +57,4 @@ export const RES_PASS = gql`
       activeToken
     }
   }
-`
+`;
