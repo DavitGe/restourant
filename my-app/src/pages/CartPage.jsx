@@ -24,7 +24,7 @@ const Cart = ({ cartList, setCartList }) => {
 
   if (cartList) {
     if (cartList !== []) {
-      cartList.map((e) => {
+      cartList.forEach((e) => {
         if (e) {
           startingPrice += parseInt(e.price.slice(0, -1)) * e.count;
         }
@@ -41,7 +41,7 @@ const Cart = ({ cartList, setCartList }) => {
   useEffect(() => {
     let result = 0;
     if (cartList) {
-      cartList.map((e) => {
+      cartList.forEach((e) => {
         if (e) {
           result += parseInt(e.price.slice(0, -1)) * e.count;
         }
@@ -83,6 +83,7 @@ const Cart = ({ cartList, setCartList }) => {
                 />
               );
             }
+            return null;
           })}
           <Button
             style={{ width: 161, margin: "48px auto" }}
