@@ -18,12 +18,7 @@ mongoose
   .catch((error) => next(error));
 
 // app.use(cors({ Origin: 'https://studio.apollographql.com', Credentials: true }))
-app.use(
-  "/graphql",
-  cors({
-    origin: ["https://localhost:3000/", "https://studio.apollographql.com"],
-  })
-);
+app.use(cors());
 // app.use(cookieParser())
 
 //should be last
