@@ -1,15 +1,4 @@
 // require("dotenv").config();
-const app = express();
-
-app.on("ready", () => {
-  mainWindow = new BrowserWindow({
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
-  });
-});
-
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 const express = require("express");
@@ -21,6 +10,7 @@ const resolvers = require("./graphql");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middlewares/error-middleware");
 
+const app = express();
 const typeDefs = require("./graphql/typeDefs");
 mongoose
   .connect(mongoUrl)
