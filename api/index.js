@@ -1,9 +1,19 @@
 // require("dotenv").config();
+const app = express();
+
+app.on("ready", () => {
+  mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
+});
+
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-const app = express();
 
 const mongoUrl = process.env.MONGO_URI;
 
