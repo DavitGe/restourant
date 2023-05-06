@@ -12,7 +12,7 @@ import {
 } from "@apollo/client";
 
 const httpLink = new HttpLink({
-  uri: "https://restourant-api.vercel.app/",
+  uri: "https://restourant-api.onrender.com",
 });
 
 const authLink = new ApolloLink((operation, forward) => {
