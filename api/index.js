@@ -14,7 +14,7 @@ const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-
+const corsOptions = require("./config/corsOptions");
 const mongoUrl = process.env.MONGO_URI;
 
 const resolvers = require("./graphql");
@@ -28,7 +28,7 @@ mongoose
   .catch((error) => next(error));
 
 // app.use(cors({ Origin: 'https://studio.apollographql.com', Credentials: true }))
-app.use(cors({ Origin: "http://localhost:3000/" }));
+app.use(cors(corsOptions));
 // app.use(cookieParser())
 
 //should be last
